@@ -1,0 +1,23 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #fef9f5;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+.container {
+    text-align: center;
+    padding: 50px;
+}
+.profile-pic {
+    width: 200px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+a {
+    color: #d36135;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
