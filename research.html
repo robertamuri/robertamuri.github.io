@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Research - Roberta Muri</title>
 
-    <!-- ✅ SEO META TAGS -->
     <meta name="description" content="Roberta Muri – Publications and working papers in environmental economics, adaptation policies, spatial econometrics, and local policy evaluation.">
     <meta name="keywords" content="Roberta Muri, Research, Economics, Environmental Policy, Spatial Data, Adaptation Policies, Working Papers, Climate Change, Waste Management">
     <meta name="author" content="Roberta Muri" />
@@ -19,17 +18,12 @@
             margin: 0;
             padding: 40px 20px;
             text-align: center;
+            line-height: 1.6;
         }
 
-        h1 {
-            font-size: 2.2em;
-            margin-bottom: 10px;
-        }
+        h1 { font-size: 2.2em; margin-bottom: 10px; }
 
-        nav {
-            margin: 20px 0 40px;
-        }
-
+        nav { margin: 20px 0 40px; }
         nav a {
             margin: 0 12px;
             text-decoration: none;
@@ -37,10 +31,7 @@
             color: #d36135;
             font-size: 1.1em;
         }
-
-        nav a:hover {
-            text-decoration: underline;
-        }
+        nav a:hover { text-decoration: underline; }
 
         h2 {
             color: #d36135;
@@ -62,15 +53,42 @@
             padding-bottom: 20px;
         }
 
-        .entry p em {
-            display: block;
+        a { color: #d36135; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        /* --- Toggle Abstract Styles --- */
+        .abstract-btn {
+            background: none;
+            border: none;
+            color: #d36135;
+            cursor: pointer;
+            font-size: 0.9em;
+            font-weight: bold;
+            padding: 0;
             margin-top: 10px;
-            line-height: 1.6;
+            display: flex;
+            align-items: center;
         }
 
-        a {
-            color: #d36135;
+        .abstract-btn:hover { text-decoration: underline; }
+
+        .abstract-btn .arrow {
+            display: inline-block;
+            margin-left: 5px;
+            transition: transform 0.3s ease;
         }
+
+        .abstract-content {
+            display: none; /* Hidden by default */
+            margin-top: 10px;
+            font-style: italic;
+            font-size: 0.95em;
+            color: #444;
+        }
+
+        /* Class for when abstract is shown */
+        .abstract-content.show { display: block; }
+        .abstract-btn.active .arrow { transform: rotate(180deg); }
     </style>
 </head>
 <body>
@@ -88,35 +106,79 @@
 
     <section id="publications">
         <h2>Publications</h2>
+
         <div class="entry">
             <strong>
                 <a href="https://link.springer.com/article/10.1007/s10640-025-01013-w" target="_blank">
-                Municipal Waste Policies and Spillover Effects
+                    Municipal Waste Policies and Spillover Effects
                 </a>
             </strong> (2025) — with 
             <a href="https://sites.google.com/site/abucciol/" target="_blank">Alessandro Bucciol</a> and 
             <a href="https://sites.google.com/site/francescarossiphd/" target="_blank">Francesca Rossi</a>, 
-            <em><strong>Environmental and Resource Economics</strong></em>, 
-            <a href="https://doi.org/10.1007/s10640-025-01013-w" target="_blank">https://doi.org/10.1007/s10640-025-01013-w</a>.
-            <p><em>Abstract:</em> Using a unique dataset of administrative data from municipalities in the Veneto region of Italy for 2010–2019, we develop a spatial econometric model to study the effects of two waste management policies: Door-to-Door collection and Pay-As-You-Throw tariff. We focus on the impact of these policies on waste sorting and accumulation, with particular attention to spatial spillovers. Both policies show similar effects on the outcome variables, leading to an increase in waste sorting and a reduction in waste accumulation; interestingly, we also find evidence of spatial spillovers. However, we identify unintended negative spillovers, where waste is diverted to neighboring municipalities with less stringent regimes, potentially undermining policy effectiveness. This study is the first to use a spatial econometric model to investigate how the adoption of a policy in a municipality affects waste production in surrounding areas, highlighting the need for coordinated decisions in the implementation of waste management policies.</p>
+            <em><strong>Environmental and Resource Economics</strong></em>.
+            
+            <button class="abstract-btn" onclick="toggleAbstract(this)">
+                Abstract <span class="arrow">▼</span>
+            </button>
+            <div class="abstract-content">
+                Using a unique dataset of administrative data from municipalities in the Veneto region of Italy for 2010–2019, we develop a spatial econometric model to study the effects of two waste management policies: Door-to-Door collection and Pay-As-You-Throw tariff. We focus on the impact of these policies on waste sorting and accumulation, with particular attention to spatial spillovers. Both policies show similar effects on the outcome variables, leading to an increase in waste sorting and a reduction in waste accumulation; interestingly, we also find evidence of spatial spillovers. However, we identify unintended negative spillovers, where waste is diverted to neighboring municipalities with less stringent regimes, potentially undermining policy effectiveness. This study is the first to use a spatial econometric model to investigate how the adoption of a policy in a municipality affects waste production in surrounding areas, highlighting the need for coordinated decisions in the implementation of waste management policies.
+            </div>
+        </div>
+
+        <div class="entry">
+            <strong>
+                <a href="https://doi.org/10.1016/j.jbusres.2024.114615" target="_blank">
+                    The effect of COVID policy restrictions on donations during the sustainable and entrepreneurial context
+                </a>
+            </strong> (2024) — with 
+            Giuliana Borello, 
+            <em><strong>Journal of Business Research</strong></em>, Vol. 177, 114615.
+            
+            <button class="abstract-btn" onclick="toggleAbstract(this)">
+                Abstract <span class="arrow">▼</span>
+            </button>
+            <div class="abstract-content">
+                Using real platform data, this paper assesses donors’ reactions to a rare event; specifically, we demonstrate how donors were able to compensate for (or stabilize) healthcare deficits and policy restrictions used to mitigate the spread of COVID-19. Based on a sample of 20,784 COVID-related donation campaigns promoted on the GoFundMe platform from January 30, 2020 to November 23, 2021, the paper shows that donors decided to donate based on campaign purpose and reliability: specifically, campaigns with the purpose to support hospitals or to buy healthcare materials in countries more affected by the pandemic received more funds. Moreover, the paper provides evidence of the impact of different government policy restrictions on campaign outcome in terms of the amount raised and the number of campaigns promoted in six European countries. As donations during COVID-19 were valuable (in particular, for public institutions) in terms of amount and timeliness, our findings offer valuable insights into how governments encouraged donations via fiscal incentives and policy restrictions.
+            </div>
         </div>
     </section>
-
 
     <section id="working-papers">
         <h2>Working Papers</h2>
-
         <div class="entry">
             <strong>Rising Waters, Shifting Lands: Evaluating the Effectiveness of Adaptation Policies</strong>
-            <p><em>Abstract:</em> This paper examines whether climate adaptation policies can mitigate the economic impacts of extreme weather events. It introduces a novel dataset of local preparedness interventions, constructed via a text-based classification algorithm applied to public investment records. The effectiveness of these interventions is evaluated in the context of the May 2023 floods in Emilia-Romagna, Italy, by linking the dataset with geospatial flood data and firm-level economic outcomes. Exploiting variation in rainfall intensity across municipalities, the analysis identifies the causal impact of adaptation on firm performance. While investments tend to concentrate in historically flood-prone areas, they offer limited short-term protection where rainfall shocks are extreme and unanticipated. The findings highlight the importance—and current limitations—of local preparedness in the face of growing climate volatility.</p>
+            <button class="abstract-btn" onclick="toggleAbstract(this)">
+                Abstract <span class="arrow">▼</span>
+            </button>
+            <div class="abstract-content">
+                This paper examines whether climate adaptation policies can mitigate the economic impacts of extreme weather events. It introduces a novel dataset of local preparedness interventions, constructed via a text-based classification algorithm applied to public investment records. The effectiveness of these interventions is evaluated in the context of the May 2023 floods in Emilia-Romagna, Italy, by linking the dataset with geospatial flood data and firm-level economic outcomes. Exploiting variation in rainfall intensity across municipalities, the analysis identifies the causal impact of adaptation on firm performance. While investments tend to concentrate in historically flood-prone areas, they offer limited short-term protection where rainfall shocks are extreme and unanticipated. The findings highlight the importance—and current limitations—of local preparedness in the face of growing climate volatility.
+            </div>
         </div>
 
         <div class="entry">
-            <strong>Classifying Hydrological Risk Adaptation Policies with Large Language Models: the HYDROADAPT Dataset</strong>  
-            <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5319205" target="_blank">Available at SSRN</a>
-            <p><em>Abstract:</em> Adaptation to climate-related hydrological risks—such as floods and landslides—is increasingly central to disaster management and resilience policy. Yet measuring adaptation efforts at scale remains challenging. This paper introduces HYDROADAPT, a novel dataset of adaptation policies related to hydrological risk, constructed using a custom classification pipeline powered by large language models (LLMs). Drawing from the Italian registry of public investments (OpenCUP), I focus on the Emilia-Romagna region and identify over 24,000 projects semantically linked to hydrological instability. I classify these projects as either Ex-Ante (preparedness) or Ex-Post (remedial) interventions based on their textual descriptions. Each policy is geolocated, time-stamped, and enriched with metadata on funding volume, policy instrument, and implementing body. I present descriptive patterns in adaptation activity across time, space, and intervention types. To validate the classification, I use the timing of the May 2023 floods that hit the region. HYDROADAPT provides a scalable, transparent, and replicable framework for measuring climate adaptation policy — and lays the foundation for future empirical evaluation of its effectiveness.</p>
+        <strong>Classifying Hydrological Risk Adaptation Policies with Large Language Models: the HYDROADAPT Dataset</strong>  
+        <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5319205" target="_blank">Available at SSRN</a>
+        
+        <button class="abstract-btn" onclick="toggleAbstract(this)">
+            Abstract <span class="arrow">▼</span>
+        </button>
+        <div class="abstract-content">
+            Adaptation to climate-related hydrological risks—such as floods and landslides—is increasingly central to disaster management and resilience policy. Yet measuring adaptation efforts at scale remains challenging. This paper introduces HYDROADAPT, a novel dataset of adaptation policies related to hydrological risk, constructed using a custom classification pipeline powered by large language models (LLMs). Drawing from the Italian registry of public investments (OpenCUP), I focus on the Emilia-Romagna region and identify over 24,000 projects semantically linked to hydrological instability. I classify these projects as either Ex-Ante (preparedness) or Ex-Post (remedial) interventions based on their textual descriptions. Each policy is geolocated, time-stamped, and enriched with metadata on funding volume, policy instrument, and implementing body. I present descriptive patterns in adaptation activity across time, space, and intervention types. To validate the classification, I use the timing of the May 2023 floods that hit the region. HYDROADAPT provides a scalable, transparent, and replicable framework for measuring climate adaptation policy — and lays the foundation for future empirical evaluation of its effectiveness.
         </div>
     </section>
+
+    <script>
+        function toggleAbstract(btn) {
+            // Find the abstract content div immediately after the button
+            const content = btn.nextElementSibling;
+            
+            // Toggle the visibility
+            content.classList.toggle('show');
+            
+            // Toggle the arrow rotation
+            btn.classList.toggle('active');
+        }
+    </script>
 
 </body>
 </html>
