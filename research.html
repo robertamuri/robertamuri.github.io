@@ -142,28 +142,43 @@
     </section>
 
     <section id="working-papers">
-        <h2>Working Papers</h2>
-        <div class="entry">
-            <strong>Rising Waters, Shifting Lands: Evaluating the Effectiveness of Adaptation Policies</strong>
-            <button class="abstract-btn" onclick="toggleAbstract(this)">
-                Abstract <span class="arrow">▼</span>
-            </button>
-            <div class="abstract-content">
-                This paper examines whether climate adaptation policies can mitigate the economic impacts of extreme weather events. It introduces a novel dataset of local preparedness interventions, constructed via a text-based classification algorithm applied to public investment records. The effectiveness of these interventions is evaluated in the context of the May 2023 floods in Emilia-Romagna, Italy, by linking the dataset with geospatial flood data and firm-level economic outcomes. Exploiting variation in rainfall intensity across municipalities, the analysis identifies the causal impact of adaptation on firm performance. While investments tend to concentrate in historically flood-prone areas, they offer limited short-term protection where rainfall shocks are extreme and unanticipated. The findings highlight the importance—and current limitations—of local preparedness in the face of growing climate volatility.
-            </div>
-        </div>
+  <h2>Working Papers</h2>
 
-        <div class="entry">
-        <strong>Classifying Hydrological Risk Adaptation Policies with Large Language Models: the HYDROADAPT Dataset</strong>  
-        <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5319205" target="_blank">Available at SSRN</a>
-        
-        <button class="abstract-btn" onclick="toggleAbstract(this)">
-            Abstract <span class="arrow">▼</span>
-        </button>
-        <div class="abstract-content">
-            Adaptation to climate-related hydrological risks—such as floods and landslides—is increasingly central to disaster management and resilience policy. Yet measuring adaptation efforts at scale remains challenging. This paper introduces HYDROADAPT, a novel dataset of adaptation policies related to hydrological risk, constructed using a custom classification pipeline powered by large language models (LLMs). Drawing from the Italian registry of public investments (OpenCUP), I focus on the Emilia-Romagna region and identify over 24,000 projects semantically linked to hydrological instability. I classify these projects as either Ex-Ante (preparedness) or Ex-Post (remedial) interventions based on their textual descriptions. Each policy is geolocated, time-stamped, and enriched with metadata on funding volume, policy instrument, and implementing body. I present descriptive patterns in adaptation activity across time, space, and intervention types. To validate the classification, I use the timing of the May 2023 floods that hit the region. HYDROADAPT provides a scalable, transparent, and replicable framework for measuring climate adaptation policy — and lays the foundation for future empirical evaluation of its effectiveness.
-        </div>
-    </section>
+  <div class="entry">
+    <strong>Firms Under Water: Floods, Adaptation and Performance</strong>
+
+    <!-- Presented @ -->
+    <div class="presented-at">
+      Presented @ IAERE 2026
+    </div>
+
+    <button class="abstract-btn" onclick="toggleAbstract(this)">
+      Abstract <span class="arrow">▼</span>
+    </button>
+    <div class="abstract-content">
+      This paper examines whether public adaptation investments reduce firms’ vulnerability to extreme rainfall shocks. ...
+    </div>
+  </div>
+
+  <div class="entry">
+    <strong>Classifying Hydrological Risk Adaptation Policies with Large Language Models: the HYDROADAPT Dataset</strong>
+    <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5319205" target="_blank">Available at SSRN</a>
+
+    <!-- Presented @ -->
+    <div class="presented-at">
+      Presented @ Mapping Environmental Vulnerabilities: Data, Space and Risk, University of Roma Tre (2025);
+      Verona Early Career Workshop in Economics, University of Verona (2025)
+    </div>
+
+    <button class="abstract-btn" onclick="toggleAbstract(this)">
+      Abstract <span class="arrow">▼</span>
+    </button>
+    <div class="abstract-content">
+      Adaptation to climate-related hydrological risks—such as floods and landslides—is increasingly central to disaster management...
+    </div>
+  </div>
+</section>
+
 
     <script>
         function toggleAbstract(btn) {
