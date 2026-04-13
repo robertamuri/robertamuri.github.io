@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>primafonte — notizie primarie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400&family=Instrument+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0e0e0e;
+    --paper: #f5f2eb;
+    --mid: #6b6760;
+    --rule: #0e0e0e;
+    --accent: #1a1a1a;
+  }
+
+  html { font-size: 16px; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Instrument Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── HEADER ── */
+  header {
+    border-bottom: 2px solid var(--rule);
+    padding: 28px 48px 20px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    animation: fadeDown 0.6s ease both;
+  }
+
+  .wordmark {
+    font-family: 'DM Serif Display', serif;
+    font-size: 42px;
+    letter-spacing: -1px;
+    line-height: 1;
+  }
+
+  .wordmark em {
+    font-style: italic;
+    color: var(--mid);
+  }
+
+  .header-right {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--mid);
+    text-align: right;
+    line-height: 1.6;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 80px 48px 60px;
+    max-width: 900px;
+    animation: fadeUp 0.7s 0.15s ease both;
+  }
+
+  .hero-kicker {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hero-kicker::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--mid);
+  }
+
+  .hero-headline {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(40px, 7vw, 76px);
+    line-height: 1.05;
+    letter-spacing: -1.5px;
+    color: var(--ink);
+    margin-bottom: 36px;
+  }
+
+  .hero-headline em {
+    font-style: italic;
+    color: var(--mid);
+  }
+
+  .hero-sub {
+    font-size: 18px;
+    line-height: 1.7;
+    color: var(--mid);
+    max-width: 540px;
+    font-weight: 400;
+  }
+
+  /* ── RULES GRID ── */
+  .rules-section {
+    border-top: 1px solid var(--rule);
+    padding: 60px 48px;
+    animation: fadeUp 0.7s 0.3s ease both;
+  }
+
+  .rules-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: 40px;
+  }
+
+  .rules-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+  }
+
+  .rule-item {
+    padding: 32px 36px 32px 0;
+    border-right: 1px solid #ccc9bf;
+  }
+
+  .rule-item:last-child { border-right: none; }
+  .rule-item:not(:first-child) { padding-left: 36px; }
+
+  .rule-no {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--mid);
+    margin-bottom: 14px;
+  }
+
+  .rule-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    line-height: 1.2;
+    margin-bottom: 10px;
+    color: var(--ink);
+  }
+
+  .rule-body {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--mid);
+  }
+
+  /* ── MANIFESTO ── */
+  .manifesto-section {
+    background: #2c3e35;
+    color: var(--paper);
+    padding: 80px 48px;
+    animation: fadeUp 0.7s 0.45s ease both;
+  }
+
+  .manifesto-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 40px;
+  }
+
+  .manifesto-text {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(22px, 3.5vw, 36px);
+    line-height: 1.5;
+    max-width: 780px;
+    color: var(--paper);
+  }
+
+  .manifesto-text em {
+    font-style: italic;
+    color: #aaa9a0;
+  }
+
+  /* ── COME FUNZIONA ── */
+  .how-section {
+    border-top: 1px solid var(--rule);
+    padding: 60px 48px;
+    animation: fadeUp 0.7s 0.55s ease both;
+  }
+
+  .how-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: 40px;
+  }
+
+  .how-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+
+  .how-step {
+    padding: 0 32px 0 0;
+    border-right: 1px solid #ccc9bf;
+  }
+
+  .how-step:last-child { border-right: none; }
+  .how-step:not(:first-child) { padding-left: 32px; }
+
+  .step-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 48px;
+    color: #d9d5ca;
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+
+  .step-text {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--ink);
+  }
+
+  /* ── RICERCA NOTE ── */
+  .research-bar {
+    background: #e8e4d9;
+    padding: 22px 48px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-top: 1px solid #ccc9bf;
+    animation: fadeUp 0.7s 0.6s ease both;
+  }
+
+  .research-icon {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--mid);
+    white-space: nowrap;
+    letter-spacing: 0.05em;
+  }
+
+  .research-rule {
+    width: 1px;
+    height: 28px;
+    background: #ccc9bf;
+  }
+
+  .research-text {
+    font-size: 13px;
+    color: var(--mid);
+    line-height: 1.6;
+  }
+
+  /* ── CTA ── */
+  .cta-section {
+    padding: 80px 48px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    border-top: 2px solid var(--rule);
+    animation: fadeUp 0.7s 0.65s ease both;
+  }
+
+  .cta-headline {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(28px, 4vw, 48px);
+    line-height: 1.15;
+    max-width: 500px;
+    letter-spacing: -0.5px;
+  }
+
+  .cta-headline em { font-style: italic; color: var(--mid); }
+
+  .cta-right {
+    text-align: right;
+  }
+
+  .cta-email {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--mid);
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .cta-btn {
+    display: inline-block;
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--paper);
+    background: var(--ink);
+    padding: 13px 32px;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+    transition: opacity 0.15s;
+  }
+
+  .cta-btn:hover { opacity: 0.75; }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid #ccc9bf;
+    padding: 20px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-left {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--mid);
+  }
+
+  .footer-right {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--mid);
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 720px) {
+    header, .hero, .rules-section, .how-section, .cta-section, .manifesto-section, .research-bar { padding-left: 24px; padding-right: 24px; }
+    .rules-grid, .how-steps { grid-template-columns: 1fr; }
+    .rule-item, .how-step { border-right: none; border-bottom: 1px solid #ccc9bf; padding: 24px 0; }
+    .rule-item:last-child, .how-step:last-child { border-bottom: none; }
+    .rule-item:not(:first-child), .how-step:not(:first-child) { padding-left: 0; }
+    .cta-section { flex-direction: column; gap: 40px; align-items: flex-start; }
+    .cta-right { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wordmark">prima<em>fonte</em></div>
+  <div class="header-right">
+    accesso su invito<br>
+    alpha — 2026
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-kicker">una proposta per chi legge le notizie</div>
+  <h1 class="hero-headline">
+    Notizie primarie.<br>
+    Nessun intermediario.<br>
+    <em>Nessuna opinione.</em>
+  </h1>
+  <p class="hero-sub">
+    Primafonte raccoglie comunicati ufficiali e fonti primarie, 
+    li sintetizza senza aggettivi valutativi, 
+    e li organizza per tema — non per viralità.
+  </p>
+</section>
+
+<section class="rules-section">
+  <div class="rules-label">i principi</div>
+  <div class="rules-grid">
+    <div class="rule-item">
+      <div class="rule-no">01</div>
+      <div class="rule-title">Solo fonti primarie</div>
+      <div class="rule-body">Comunicati istituzionali, agenzie e dichiarazioni ufficiali. Il link alla fonte originale è sempre visibile. Nessun editoriale, nessun commento redazionale.</div>
+    </div>
+    <div class="rule-item">
+      <div class="rule-no">02</div>
+      <div class="rule-title">Zero visual bias</div>
+      <div class="rule-body">Niente immagini, niente thumbnail. Le immagini nelle news attivano risposte emotive prima della lettura. Qui si legge il testo, non si reagisce a una fotografia.</div>
+    </div>
+    <div class="rule-item">
+      <div class="rule-no">03</div>
+      <div class="rule-title">Identità reale</div>
+      <div class="rule-body">Ogni account è verificato con documento d'identità. I commenti sono anonimi nel feed, ma l'identità è reale. Niente fake account, niente troll.</div>
+    </div>
+  </div>
+</section>
+
+<section class="manifesto-section">
+  <div class="manifesto-label">manifesto</div>
+  <p class="manifesto-text">
+    I media italiani sono concentrati in pochi gruppi editoriali. 
+    I titoli competono per l'attenzione, non per la precisione. 
+    Le immagini creano empatia selettiva. 
+    I commenti sono anonimi e irresponsabili.<br><br>
+    <em>Primafonte è costruito al contrario.</em><br><br>
+    Pochi temi. Nessuna overexposure. 
+    Il dibattito appartiene a chi ci mette la faccia.
+  </p>
+</section>
+
+<section class="how-section">
+  <div class="how-label">come funziona</div>
+  <div class="how-steps">
+    <div class="how-step">
+      <div class="step-num">1</div>
+      <div class="step-text">L'AI legge la fonte primaria e ne estrae i fatti: chi, cosa, quando, dove. Nessuna inferenza, nessun aggettivo.</div>
+    </div>
+    <div class="how-step">
+      <div class="step-num">2</div>
+      <div class="step-text">Il sommario viene collegato a un thread tematico — ad esempio "Iran · USA · Israele" — con il link alla fonte originale sempre in evidenza.</div>
+    </div>
+    <div class="how-step">
+      <div class="step-num">3</div>
+      <div class="step-text">Gli utenti verificati commentano e discutono sotto ogni thread, con sistema di risposta annidato. Nessun filtro editoriale sui commenti.</div>
+    </div>
+    <div class="how-step">
+      <div class="step-num">4</div>
+      <div class="step-text">Pochi temi attivi per volta. Nessun feed infinito, nessuna notifica compulsiva. La profondità conta più della quantità.</div>
+    </div>
+  </div>
+</section>
+
+<div class="research-bar">
+  <span class="research-icon">nota sulla ricerca</span>
+  <div class="research-rule"></div>
+  <p class="research-text">
+    I dati aggregati di utilizzo della piattaforma potranno essere impiegati a fini di ricerca accademica sui comportamenti informativi. 
+    I dati sono anonimizzati e non saranno mai ceduti a terzi né usati a fini commerciali.
+  </p>
+</div>
+
+<section class="cta-section">
+  <h2 class="cta-headline">
+    Vuoi cambiare<br>
+    <em>il modo in cui leggi le notizie?</em>
+  </h2>
+  <div class="cta-right">
+    <span class="cta-email">accesso su invito — alpha chiusa</span>
+    <a class="cta-btn" href="mailto:hello@primafonte.it">richiedi accesso →</a>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-left">primafonte · 2026</span>
+  <span class="footer-right">informazione primaria · identità reale · zero rumore</span>
+</footer>
+
+</body>
+</html>
