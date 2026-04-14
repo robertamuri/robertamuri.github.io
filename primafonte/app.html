@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>primafonte</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400&family=Instrument+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink: #0e0e0e;
+  --paper: #f5f2eb;
+  --mid: #6b6760;
+  --rule: #d4d0c7;
+  --rule-strong: #0e0e0e;
+  --surface: #eceae2;
+  --forest: #2c3e35;
+  --forest-light: #e6eeea;
+  --forest-mid: #4a6b5a;
+}
+
+html, body { height: 100%; font-size: 15px; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Instrument Sans', sans-serif;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ── NAV ── */
+nav {
+  border-bottom: 2px solid var(--rule-strong);
+  padding: 0 32px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  background: var(--paper);
+  z-index: 10;
+}
+
+.wordmark {
+  font-family: 'DM Serif Display', serif;
+  font-size: 26px;
+  letter-spacing: -0.5px;
+  cursor: pointer;
+  line-height: 1;
+}
+.wordmark em { font-style: italic; color: var(--mid); }
+
+.nav-center {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  font-weight: 300;
+  color: var(--mid);
+  letter-spacing: 0.08em;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.user-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  font-weight: 300;
+  color: var(--mid);
+}
+
+.user-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--forest-mid);
+}
+
+.verified-badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  font-weight: 300;
+  color: var(--forest-mid);
+  background: var(--forest-light);
+  padding: 3px 8px;
+  border-radius: 2px;
+  letter-spacing: 0.04em;
+}
+
+/* ── LAYOUT ── */
+.app-body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* ── SIDEBAR ── */
+aside {
+  width: 210px;
+  flex-shrink: 0;
+  border-right: 1px solid var(--rule);
+  padding: 24px 0;
+  overflow-y: auto;
+  background: var(--paper);
+}
+
+.aside-section { margin-bottom: 28px; }
+
+.aside-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mid);
+  padding: 0 20px;
+  margin-bottom: 6px;
+  opacity: 0.7;
+}
+
+.thread-btn {
+  width: 100%;
+  text-align: left;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 8px 20px;
+  font-size: 13px;
+  color: var(--mid);
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: 'Instrument Sans', sans-serif;
+  transition: background 0.1s, color 0.1s;
+  border-left: 2px solid transparent;
+  line-height: 1.35;
+}
+
+.thread-btn:hover { background: var(--surface); color: var(--ink); }
+
+.thread-btn.active {
+  color: var(--forest);
+  background: var(--forest-light);
+  border-left: 2px solid var(--forest-mid);
+  font-weight: 500;
+}
+
+.thread-count {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  font-weight: 300;
+  color: var(--mid);
+  margin-left: auto;
+  opacity: 0.6;
+}
+
+.aside-rule {
+  height: 1px;
+  background: var(--rule);
+  margin: 4px 20px 20px;
+}
+
+/* ── MAIN ── */
+main {
+  flex: 1;
+  overflow-y: auto;
+  padding: 32px 40px;
+  max-width: 820px;
+}
+
+/* ── FEED HEADER ── */
+.feed-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 28px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.feed-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 22px;
+  letter-spacing: -0.3px;
+}
+
+.feed-meta {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  font-weight: 300;
+  color: var(--mid);
+}
+
+/* ── NEWS ITEM ── */
+.news-item {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--rule);
+  cursor: pointer;
+  transition: opacity 0.12s;
+}
+
+.news-item:first-child { padding-top: 0; }
+.news-item:hover { opacity: 0.72; }
+
+.news-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 9px;
+}
+
+.source-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  font-weight: 400;
+  color: var(--forest-mid);
+  background: var(--forest-light);
+  padding: 2px 7px;
+  border-radius: 2px;
+  letter-spacing: 0.03em;
+}
+
+.meta-dot { color: var(--rule); font-size: 10px; }
+
+.news-time {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  font-weight: 300;
+  color: var(--mid);
+  letter-spacing: 0.03em;
+}
+
+.news-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 19px;
+  line-height: 1.3;
+  letter-spacing: -0.2px;
+  color: var(--ink);
+  margin-bottom: 7px;
+}
+
+.news-summary {
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--mid);
+  max-width: 640px;
+  margin-bottom: 12px;
+}
+
+.news-footer {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.news-stat {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  font-weight: 300;
+  color: var(--mid);
+  letter-spacing: 0.03em;
+}
+
+.news-link-hint {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  font-weight: 300;
+  color: var(--mid);
+  margin-left: auto;
+  letter-spacing: 0.04em;
+  opacity: 0.5;
+}
+
+/* ── ARTICLE VIEW ── */
+.article-view { display: none; }
+
+.back-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 32px;
+  cursor: pointer;
+  color: var(--mid);
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  width: fit-content;
+}
+.back-row:hover { color: var(--ink); }
+
+.article-source-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.article-thread-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  font-weight: 300;
+  color: var(--mid);
+  letter-spacing: 0.04em;
+}
+
+.article-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(24px, 3vw, 34px);
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+  color: var(--ink);
+  margin-bottom: 12px;
+  max-width: 680px;
+}
+
+.article-dateline {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  font-weight: 300;
+  color: var(--mid);
+  margin-bottom: 28px;
+  letter-spacing: 0.04em;
+}
+
+.article-rule {
+  height: 1px;
+  background: var(--rule);
+  margin-bottom: 28px;
+}
+
+.ai-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin-bottom: 14px;
+  opacity: 0.6;
+}
+
+.article-body {
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--ink);
+  max-width: 620px;
+  margin-bottom: 32px;
+}
+
+.article-body p { margin-bottom: 16px; }
+
+.source-block {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: var(--surface);
+  border-left: 3px solid var(--forest-mid);
+  margin-bottom: 40px;
+}
+
+.source-block-left {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  font-weight: 300;
+  color: var(--mid);
+  line-height: 1.6;
+}
+
+.source-block-left strong {
+  display: block;
+  font-weight: 400;
+  color: var(--ink);
+  margin-bottom: 2px;
+}
+
+.source-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--forest);
+  text-decoration: none;
+  padding: 8px 16px;
+  border: 1px solid var(--forest-mid);
+  transition: background 0.12s;
+}
+.source-link:hover { background: var(--forest-light); }
+
+/* ── COMMENTS ── */
+.comments-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 24px;
+}
+
+.comments-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 18px;
+  letter-spacing: -0.2px;
+}
+
+.comments-policy {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  font-weight: 300;
+  color: var(--mid);
+  letter-spacing: 0.04em;
+}
+
+.comment-compose {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 32px;
+  align-items: flex-start;
+}
+
+.comment-avatar {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  font-weight: 400;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.compose-right { flex: 1; }
+
+.compose-right textarea {
+  width: 100%;
+  font-size: 13px;
+  font-family: 'Instrument Sans', sans-serif;
+  padding: 10px 14px;
+  border: 1px solid var(--rule);
+  background: var(--paper);
+  color: var(--ink);
+  resize: none;
+  height: 68px;
+  line-height: 1.55;
+  outline: none;
+  margin-bottom: 8px;
+}
+.compose-right textarea:focus { border-color: var(--forest-mid); }
+
+.compose-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.compose-note {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  font-weight: 300;
+  color: var(--mid);
+  opacity: 0.6;
+}
+
+.post-btn {
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--paper);
+  background: var(--ink);
+  border: none;
+  padding: 7px 18px;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  transition: opacity 0.12s;
+}
+.post-btn:hover { opacity: 0.75; }
+
+/* ── COMMENT ── */
+.comment {
+  display: flex;
+  gap: 12px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.comment-body { flex: 1; }
+
+.comment-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.comment-user {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.comment-verified {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  font-weight: 300;
+  color: var(--forest-mid);
+  background: var(--forest-light);
+  padding: 1px 5px;
+  border-radius: 2px;
+  letter-spacing: 0.04em;
+}
+
+.comment-time {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  font-weight: 300;
+  color: var(--mid);
+  margin-left: auto;
+  opacity: 0.6;
+}
+
+.comment-text {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--ink);
+  margin-bottom: 8px;
+  max-width: 600px;
+}
+
+.comment-actions {
+  display: flex;
+  gap: 16px;
+}
+
+.c-action {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  font-weight: 300;
+  color: var(--mid);
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  background: none;
+  border: none;
+  padding: 0;
+}
+.c-action:hover { color: var(--ink); }
+
+.reply-block {
+  margin-top: 14px;
+  margin-left: 0;
+  padding-left: 18px;
+  border-left: 2px solid var(--rule);
+}
+
+/* ── RIGHT PANEL ── */
+.right-panel {
+  width: 220px;
+  flex-shrink: 0;
+  border-left: 1px solid var(--rule);
+  padding: 24px 20px;
+  overflow-y: auto;
+}
+
+.panel-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin-bottom: 16px;
+  opacity: 0.7;
+}
+
+.related-item {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--rule);
+  cursor: pointer;
+}
+
+.related-item:last-child { border-bottom: none; }
+.related-item:hover .related-title { color: var(--forest); }
+
+.related-source {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  font-weight: 300;
+  color: var(--mid);
+  margin-bottom: 4px;
+  opacity: 0.7;
+}
+
+.related-title {
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--ink);
+  transition: color 0.1s;
+}
+
+.panel-rule { height: 1px; background: var(--rule); margin: 20px 0; }
+
+.stats-row {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.stat-item { }
+
+.stat-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  font-weight: 300;
+  color: var(--mid);
+  margin-bottom: 2px;
+  opacity: 0.6;
+}
+
+.stat-value {
+  font-family: 'DM Serif Display', serif;
+  font-size: 22px;
+  color: var(--ink);
+  letter-spacing: -0.3px;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-in { animation: fadeIn 0.25s ease both; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wordmark" id="logo-btn">prima<em>fonte</em></div>
+  <div class="nav-center">informazione primaria · identità reale · zero rumore</div>
+  <div class="nav-right">
+    <span class="verified-badge">✓ verificata</span>
+    <div class="user-pill">
+      <div class="user-dot"></div>
+      R. Muri
+    </div>
+  </div>
+</nav>
+
+<div class="app-body">
+
+  <!-- SIDEBAR -->
+  <aside>
+    <div class="aside-section">
+      <div class="aside-label">thread</div>
+      <button class="thread-btn active" data-thread="iran">Iran · USA · Israele <span class="thread-count">4</span></button>
+    </div>
+    <div class="aside-rule"></div>
+    <div class="aside-section">
+      <div class="aside-label">forum</div>
+      <button class="thread-btn" data-thread="esteri">Esteri</button>
+      <button class="thread-btn" data-thread="economia">Economia</button>
+      <button class="thread-btn" data-thread="istituzioni">Istituzioni</button>
+      <button class="thread-btn" data-thread="scienza">Scienza</button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main id="main-area">
+
+    <!-- FEED VIEW -->
+    <div id="feed-view" class="fade-in">
+      <div class="feed-header">
+        <div class="feed-title">Iran · USA · Israele</div>
+        <div class="feed-meta">4 fonti · aggiornato 14 apr 2026</div>
+      </div>
+      <div id="news-list"></div>
+    </div>
+
+    <!-- ARTICLE VIEW -->
+    <div id="article-view" class="article-view"></div>
+
+  </main>
+
+  <!-- RIGHT PANEL -->
+  <div class="right-panel" id="right-panel">
+    <div class="panel-label">in questo thread</div>
+    <div class="stats-row">
+      <div class="stat-item">
+        <div class="stat-label">fonti</div>
+        <div class="stat-value">4</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-label">commenti</div>
+        <div class="stat-value">38</div>
+      </div>
+    </div>
+    <div class="panel-rule"></div>
+  </div>
+
+</div>
+
+<script>
+const threads = {
+  iran: {
+    title: "Iran · USA · Israele",
+    count: 4,
+    date: "14 apr 2026"
+  }
+};
+
+const news = [
+  {
+    id: 0,
+    title: "Colloqui USA–Iran a Muscat: quarto round di negoziati sul nucleare concluso senza accordo",
+    source: "U.S. Department of State",
+    time: "14 apr 2026 · 09:15",
+    comments: 14,
+    reads: 430,
+    summary: "Il quarto round di negoziati indiretti tra Stati Uniti e Iran si è concluso a Muscat senza un accordo formale. La delegazione statunitense ha dichiarato che i colloqui rimangono costruttivi. Il mediatore omanita ha confermato che le parti si incontreranno nuovamente entro due settimane.",
+    body: `<p>Un quarto round di negoziati indiretti tra Stati Uniti e Iran si è concluso domenica a Muscat, in Oman, senza un accordo formale ma con la conferma di entrambe le parti di voler proseguire il dialogo.</p>
+<p>Il portavoce del Dipartimento di Stato ha dichiarato che i colloqui hanno affrontato le questioni relative al livello di arricchimento dell'uranio e alle modalità di verifica internazionale. Nessun dettaglio è stato fornito sui punti di disaccordo specifici.</p>
+<p>Il mediatore omanita, ministro degli Esteri Badr Al-Busaidi, ha confermato che un nuovo incontro è previsto entro due settimane nella stessa sede. La delegazione iraniana non ha rilasciato dichiarazioni pubbliche al termine della sessione.</p>`,
+    url: "https://www.state.gov/briefings-statements/",
+    source_full: "U.S. Department of State — Briefings & Statements"
+  },
+  {
+    id: 1,
+    title: "Dichiarazione del Consiglio UE: sostegno ai negoziati sul nucleare iraniano e monito sulle sanzioni",
+    source: "Consiglio dell'Unione Europea",
+    time: "13 apr 2026 · 17:40",
+    comments: 9,
+    reads: 318,
+    summary: "Il Consiglio dell'Unione Europea ha rilasciato una dichiarazione in cui esprime sostegno ai negoziati in corso tra USA e Iran. Il testo avverte che un eventuale fallimento delle trattative comporterà un inasprimento delle misure restrittive vigenti.",
+    body: `<p>Il Consiglio dell'Unione Europea ha adottato lunedì una dichiarazione formale in cui sostiene i negoziati in corso tra Stati Uniti e Iran sul programma nucleare iraniano, ribadendo al contempo la disponibilità dell'UE ad agire come garante di un eventuale accordo.</p>
+<p>Il documento, approvato dai ministri degli Esteri dei 27 Stati membri riuniti a Lussemburgo, sottolinea che un ritorno all'accordo del 2015 (JCPOA) rimane l'obiettivo prioritario della diplomazia europea. Viene inoltre precisato che, in assenza di progressi concreti entro la fine del secondo trimestre, l'UE valuterà il ripristino dei meccanismi di sanzione sospesi.</p>
+<p>Nessun rappresentante iraniano era presente alla riunione. L'Alto rappresentante per la politica estera ha dichiarato che i canali diplomatici diretti con Teheran rimangono aperti.</p>`,
+    url: "https://www.consilium.europa.eu/en/press/press-releases/",
+    source_full: "Consiglio dell'Unione Europea — Comunicati stampa"
+  },
+  {
+    id: 2,
+    title: "AIEA: gli ispettori confermano l'accesso ai siti dichiarati. Nessuna violazione rilevata",
+    source: "AIEA — Agenzia Internazionale per l'Energia Atomica",
+    time: "12 apr 2026 · 11:00",
+    comments: 11,
+    reads: 502,
+    summary: "La delegazione dell'AIEA incaricata delle ispezioni ai siti nucleari iraniani ha confermato l'accesso regolare alle strutture di Natanz e Fordow. Il rapporto non segnala violazioni dei protocolli NPT nel periodo di riferimento.",
+    body: `<p>L'Agenzia Internazionale per l'Energia Atomica ha reso noto che la delegazione di ispettori attualmente in Iran ha completato le verifiche presso i siti dichiarati di Natanz e Fordow, confermando l'accesso senza restrizioni alle strutture.</p>
+<p>Il comunicato dell'AIEA precisa che nel periodo compreso tra il 1° e il 10 aprile 2026 non sono state rilevate violazioni dei protocolli previsti dal Trattato di Non Proliferazione nucleare (NPT). Le ispezioni hanno incluso il monitoraggio delle centrifughe attive e la verifica delle riserve di uranio arricchito.</p>
+<p>L'agenzia sottolinea che il rapporto si riferisce esclusivamente ai siti soggetti a dichiarazione obbligatoria. Le verifiche sui siti non dichiarati restano soggette a negoziazione separata nell'ambito del Protocollo Aggiuntivo, la cui applicazione da parte iraniana rimane sospesa dal 2021.</p>`,
+    url: "https://www.iaea.org/newscenter/pressreleases",
+    source_full: "AIEA — Centro stampa, comunicati ufficiali"
+  },
+  {
+    id: 3,
+    title: "Governo israeliano: nessun accordo nucleare è accettabile senza smantellamento delle centrifughe",
+    source: "Ministry of Foreign Affairs of Israel",
+    time: "11 apr 2026 · 14:22",
+    comments: 4,
+    reads: 267,
+    summary: "Il Ministero degli Esteri israeliano ha rilasciato una dichiarazione ufficiale in cui stabilisce che qualsiasi accordo con l'Iran sul nucleare dovrà prevedere lo smantellamento fisico delle centrifughe, non solo la loro sospensione operativa.",
+    body: `<p>Il Ministero degli Esteri di Israele ha pubblicato una dichiarazione formale in cui il governo israeliano fissa una condizione esplicita per considerare accettabile qualsiasi accordo raggiunto tra Stati Uniti e Iran: lo smantellamento fisico e verificabile delle centrifughe di arricchimento, non la semplice sospensione operativa.</p>
+<p>Il testo distingue esplicitamente tra "freeze" (congelamento) e "dismantlement" (smantellamento), definendo il primo come insufficiente a garantire la sicurezza regionale. Viene citato come riferimento metodologico l'accordo Libya 2003, in cui la Libia procedette alla rimozione fisica delle strutture.</p>
+<p>La dichiarazione non cita direttamente i negoziati in corso a Muscat, ma specifica che Israele seguirà gli sviluppi con "la massima attenzione" e si riserva il diritto di adottare misure autonome.</p>`,
+    url: "https://www.gov.il/en/departments/ministry_of_foreign_affairs",
+    source_full: "Ministry of Foreign Affairs of Israel — Dichiarazioni ufficiali"
+  }
+];
+
+const comments = {
+  0: [
+    { user: "G. Ferretti", initials: "GF", bg: "#e8e4d9", tc: "#5a5650", time: "3 ore fa",
+      text: "È il quarto round in dieci settimane. La frequenza degli incontri è significativamente più alta rispetto al 2022. Il fatto che si fissi già una data per il prossimo è un segnale positivo, indipendentemente dall'esito formale.", upvotes: 17,
+      replies: [
+        { user: "L. Marini", initials: "LM", bg: "#e6eeea", tc: "#2c3e35", time: "2 ore fa",
+          text: "Concordo sulla lettura della frequenza. Va però distinto tra cadenza degli incontri e progresso sui contenuti — due cose che non sempre si muovono insieme.", upvotes: 8 }
+      ]
+    },
+    { user: "S. Conti", initials: "SC", bg: "#eceae2", tc: "#4a4845", time: "4 ore fa",
+      text: "La mancanza di dichiarazioni pubbliche dalla delegazione iraniana è coerente con il loro approccio tradizionale ai negoziati. Non è necessariamente un segnale negativo.", upvotes: 12, replies: [] }
+  ],
+  1: [
+    { user: "A. Romano", initials: "AR", bg: "#e8e4d9", tc: "#5a5650", time: "8 ore fa",
+      text: "Il riferimento alla 'fine del secondo trimestre' come scadenza implicita è un elemento nuovo rispetto alle dichiarazioni precedenti del Consiglio. Mette una pressione temporale concreta sul tavolo.", upvotes: 21, replies: [] }
+  ],
+  2: [
+    { user: "M. De Luca", initials: "MD", bg: "#eceae2", tc: "#4a4845", time: "14 ore fa",
+      text: "La distinzione tra siti dichiarati e non dichiarati è il punto cruciale. L'accesso a Natanz e Fordow era già garantito — il nodo è sempre stato il Protocollo Aggiuntivo sospeso.", upvotes: 29,
+      replies: [
+        { user: "F. Neri", initials: "FN", bg: "#e6eeea", tc: "#2c3e35", time: "13 ore fa",
+          text: "Esatto. Il comunicato è tecnicamente corretto ma parziale: riferire solo i siti NPT senza menzionare i siti non dichiarati dà un quadro incompleto della situazione.", upvotes: 14 }
+      ]
+    }
+  ],
+  3: [
+    { user: "C. Vitale", initials: "CV", bg: "#e8e4d9", tc: "#5a5650", time: "18 ore fa",
+      text: "Il riferimento al modello libico del 2003 è significativo. Quello smantellamento fu reso possibile da condizioni politiche molto specifiche — la caduta di Saddam e la pressione post-Iraq — difficilmente replicabili oggi.", upvotes: 33, replies: [] }
+  ]
+};
+
+function renderFeed(threadKey) {
+  const feedView = document.getElementById('feed-view');
+  const articleView = document.getElementById('article-view');
+  feedView.style.display = 'block';
+  articleView.style.display = 'none';
+  feedView.className = 'fade-in';
+
+  const list = document.getElementById('news-list');
+  list.innerHTML = '';
+
+  news.forEach(item => {
+    const el = document.createElement('div');
+    el.className = 'news-item';
+    el.innerHTML = `
+      <div class="news-meta">
+        <span class="source-tag">${item.source}</span>
+        <span class="meta-dot">·</span>
+        <span class="news-time">${item.time}</span>
+      </div>
+      <div class="news-title">${item.title}</div>
+      <div class="news-summary">${item.summary}</div>
+      <div class="news-footer">
+        <span class="news-stat">${comments[item.id] ? comments[item.id].length : 0} commenti</span>
+        <span class="news-stat">${item.reads} letture</span>
+        <span class="news-link-hint">apri →</span>
+      </div>
+    `;
+    el.addEventListener('click', () => renderArticle(item.id));
+    list.appendChild(el);
+  });
+}
+
+function renderArticle(id) {
+  const item = news[id];
+  const feedView = document.getElementById('feed-view');
+  const articleView = document.getElementById('article-view');
+  feedView.style.display = 'none';
+  articleView.style.display = 'block';
+  articleView.className = 'article-view fade-in';
+
+  const itemComments = comments[id] || [];
+
+  const commentsHTML = itemComments.map(c => `
+    <div class="comment">
+      <div class="comment-avatar" style="background:${c.bg};color:${c.tc};font-size:10px;font-family:'DM Mono',monospace;font-weight:400;">${c.initials}</div>
+      <div class="comment-body">
+        <div class="comment-header">
+          <span class="comment-user">${c.user}</span>
+          <span class="comment-verified">✓ id verificata</span>
+          <span class="comment-time">${c.time}</span>
+        </div>
+        <div class="comment-text">${c.text}</div>
+        <div class="comment-actions">
+          <button class="c-action">▲ ${c.upvotes}</button>
+          <button class="c-action">↩ rispondi</button>
+        </div>
+        ${c.replies && c.replies.length ? `
+          <div class="reply-block">
+            ${c.replies.map(r => `
+              <div class="comment" style="padding:12px 0;border-bottom:none;">
+                <div class="comment-avatar" style="background:${r.bg};color:${r.tc};font-size:10px;font-family:'DM Mono',monospace;font-weight:400;width:24px;height:24px;">${r.initials}</div>
+                <div class="comment-body">
+                  <div class="comment-header">
+                    <span class="comment-user">${r.user}</span>
+                    <span class="comment-verified">✓ id verificata</span>
+                    <span class="comment-time">${r.time}</span>
+                  </div>
+                  <div class="comment-text">${r.text}</div>
+                  <div class="comment-actions">
+                    <button class="c-action">▲ ${r.upvotes}</button>
+                    <button class="c-action">↩ rispondi</button>
+                  </div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        ` : ''}
+      </div>
+    </div>
+  `).join('');
+
+  articleView.innerHTML = `
+    <div class="back-row" id="back-btn">← torna al thread</div>
+
+    <div class="article-source-row">
+      <span class="source-tag">${item.source}</span>
+      <span class="article-thread-tag">Iran · USA · Israele</span>
+    </div>
+
+    <h1 class="article-title">${item.title}</h1>
+    <div class="article-dateline">${item.time}</div>
+
+    <div class="article-rule"></div>
+
+    <div class="ai-label">sintesi — generata da AI, senza inferenze editoriali</div>
+    <div class="article-body">${item.body}</div>
+
+    <div class="source-block">
+      <div class="source-block-left">
+        <strong>${item.source_full}</strong>
+        fonte primaria originale
+      </div>
+      <a class="source-link" href="${item.url}" target="_blank">leggi la fonte ↗</a>
+    </div>
+
+    <div class="comments-header">
+      <div class="comments-title">${itemComments.length} commenti</div>
+      <div class="comments-policy">solo utenti con id verificata</div>
+    </div>
+
+    <div class="comment-compose">
+      <div class="comment-avatar" style="background:#e6eeea;color:#2c3e35;font-size:10px;font-family:'DM Mono',monospace;font-weight:400;">RM</div>
+      <div class="compose-right">
+        <textarea placeholder="Scrivi un commento basato sui fatti..."></textarea>
+        <div class="compose-footer">
+          <span class="compose-note">la tua identità è verificata · il commento è pubblico</span>
+          <button class="post-btn">pubblica</button>
+        </div>
+      </div>
+    </div>
+
+    ${commentsHTML}
+  `;
+
+  document.getElementById('back-btn').addEventListener('click', () => renderFeed('iran'));
+  document.getElementById('main-area').scrollTop = 0;
+}
+
+// Thread switching
+document.querySelectorAll('.thread-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.thread-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+
+document.getElementById('logo-btn').addEventListener('click', () => renderFeed('iran'));
+
+renderFeed('iran');
+</script>
+</body>
+</html>
