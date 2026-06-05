@@ -31,16 +31,17 @@
   </header>
 
   <main class="container narrow">
-
     <section id="publications" class="content-section">
       <h2>Publications</h2>
 
       <div class="entry">
         <p>
-          <strong>Municipal Waste Policies and Spillover Effects</strong> (2025) — with
+          <em>Municipal Waste Policies and Spillover Effects</em> (2025) — with
           <a href="https://sites.google.com/site/abucciol/" target="_blank" rel="noopener">Alessandro Bucciol</a> and
           <a href="https://sites.google.com/site/francescarossiphd/" target="_blank" rel="noopener">Francesca Rossi</a>,
-          <em><strong>Environmental and Resource Economics</strong></em>.
+          <a href="https://doi.org/10.1007/s10640-025-01013-w" target="_blank" rel="noopener">
+            <em>Environmental and Resource Economics</em>
+          </a>.
         </p>
 
         <button class="abstract-btn" onclick="toggleAbstract(this)">
@@ -54,9 +55,9 @@
 
       <div class="entry">
         <p>
-          <strong>The effect of COVID policy restrictions on donations during the sustainable and entrepreneurial context</strong> (2024) — with Giuliana Borello,
+          <em>The effect of COVID policy restrictions on donations during the sustainable and entrepreneurial context</em> (2024) — with Giuliana Borello,
           <a href="https://www.sciencedirect.com/science/article/pii/S014829632400119X" target="_blank" rel="noopener">
-            <em><strong>Journal of Business Research</strong>
+            <em>Journal of Business Research</em>
           </a>.
         </p>
 
@@ -75,11 +76,11 @@
 
       <div class="entry">
         <p>
-          <strong>Firms Under Water: Floods, Adaptation and Performance</strong>
+          <em>Firms Under Water: Floods, Adaptation and Performance</em>
         </p>
 
         <p class="presented-at">
-          <strong>Presented at:</strong> IAERE 2026
+          Presented at: IAERE 2026
         </p>
 
         <button class="abstract-btn" onclick="toggleAbstract(this)">
@@ -93,7 +94,7 @@
 
       <div class="entry">
         <p>
-          <strong>Classifying Hydrological Risk Adaptation Policies with Large Language Models: The HYDROADAPT Dataset</strong>
+          <em>Classifying Hydrological Risk Adaptation Policies with Large Language Models: The HYDROADAPT Dataset</em>
           <br>
           <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5319205" target="_blank" rel="noopener">
             Available at SSRN
@@ -101,7 +102,7 @@
         </p>
 
         <p class="presented-at">
-          <strong>Presented at:</strong>
+          Presented at:
           Mapping Environmental Vulnerabilities: Data, Space and Risk, University of Roma Tre (2025);
           Verona Early Career Workshop in Economics, University of Verona (2025)
         </p>
@@ -118,12 +119,11 @@
   </main>
 
   <script>
-  function toggleAbstract(btn) {
-    const content = btn.nextElementSibling;
-
-    content.classList.toggle("show");
-    btn.classList.toggle("active");
-  }
+    function toggleAbstract(btn) {
+      const content = btn.nextElementSibling;
+      content.classList.toggle("show");
+      btn.classList.toggle("active");
+    }
   </script>
 </body>
 </html>
