@@ -10,7 +10,7 @@ const newsItems = [
     text: `I have just landed in Los Angeles. I will be visiting Caltech, advised by Hannah Druckenmiller, until July 2026.`
   },
   {
-    date: "Feb. 12–13",
+    date: "Feb. 12",
     datetime: "2026-02-12",
     text: `I will present the paper <em>Firms Under Water: Floods, Adaptation and Performance</em> at the IAERE Annual Conference in Trento.`
   }
