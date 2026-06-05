@@ -9,8 +9,9 @@
   <meta name="author" content="Roberta Muri">
 
   <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/style.css?v=3" />
 </head>
+
 <body>
   <header class="site-header">
     <div class="header-inner">
@@ -30,34 +31,12 @@
 
   <main class="container narrow">
     <h1>News</h1>
-
-    <div class="news-cards news-page-list">
-      <article class="news-card">
-        <time datetime="2026-04-05">Apr. 5</time>
-        <p>
-          The paper <em>Firms Under Water</em> has been selected among the top 4 contributions
-          in Environmental Economics by young economists by IAERE. I will present it at the
-          Annual Meeting of the Italian Economic Society in Cagliari in October 2026, where the
-          final decision will be made for the Young Economist Award.
-        </p>
-      </article>
-
-      <article class="news-card">
-        <time datetime="2026-02-22">Feb. 22</time>
-        <p>
-          Just landed in Los Angeles. I will visit Caltech, advised by Hannah Druckenmiller,
-          up to July 2026.
-        </p>
-      </article>
-
-      <article class="news-card">
-        <time datetime="2026-02-12">Feb. 12–13</time>
-        <p>
-          I will present the paper <em>Firms Under Water: Floods, Adaptation and Performance</em>
-          at IAERE in Trento!
-        </p>
-      </article>
-    </div>
+    <div id="news-full" class="news-cards news-page-list"></div>
   </main>
+
+  <script src="assets/js/news-data.js?v=3"></script>
+  <script>
+    renderNews("news-full");
+  </script>
 </body>
 </html>
