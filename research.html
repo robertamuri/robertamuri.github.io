@@ -31,7 +31,6 @@
   </header>
 
   <main class="container narrow">
-    <h1>Research</h1>
 
     <section id="publications" class="content-section">
       <h2>Publications</h2>
@@ -119,11 +118,12 @@
   </main>
 
   <script>
-    function toggleAbstract(btn) {
-      const content = btn.nextElementSibling;
-      content.classList.toggle("show");
-      btn.classList.toggle("active");
-    }
+  function toggleAbstract(btn) {
+    const content = btn.nextElementSibling;
+
+    content.classList.toggle("show");
+    btn.classList.toggle("active");
+  }
   </script>
 </body>
 </html>
