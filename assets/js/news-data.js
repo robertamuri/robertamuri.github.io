@@ -8,7 +8,7 @@ const newsItems = [
   {
     date: "Feb. 22, 2026",
     datetime: "2026-02-22",
-    text: `I arrived in Los Angeles to begin my visiting period at Caltech, where I will be advised by Hannah Druckenmiller until July 2026.`
+    text: `I have just landed in Los Angeles. I will be visiting Caltech, advised by Hannah Druckenmiller, until July 2026.`
   },
 
   {
