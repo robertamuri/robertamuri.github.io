@@ -165,7 +165,7 @@ a:hover {
 }
 
 .news-card time {
-  color: var(--heading);
+  color: var(--accent);
   font-weight: 700;
   white-space: nowrap;
 }
