@@ -26,7 +26,7 @@ const newsItems = [
   {
     date: "Jun. 26, 2025",
     datetime: "2025-06-26",
-    text: `My paper <a href="https://link.springer.com/article/10.1007/s10640-025-01013-w" target="_blank" rel="noopener"><em>Firms Under Water: Floods, Adaptation and Performance</em></a> was published in <em>Environmental and Resource Economics</em>.`
+    text: `The paper <a href="https://link.springer.com/article/10.1007/s10640-025-01013-w" target="_blank" rel="noopener"><em>Firms Under Water: Floods, Adaptation and Performance</em></a> was published in <em>Environmental and Resource Economics</em>.`
   }
 ];
 
