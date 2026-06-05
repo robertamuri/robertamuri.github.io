@@ -1,4 +1,12 @@
 const newsItems = [
+
+  {
+    date: "Jun. 1, 2026",
+    datetime: "2026-06-01",
+    text: `I started the one-week bootcamp <em>AI in Research</em>, organized by the Engineering and Applied Science Division at Caltech.`
+
+  },
+  
   {
     date: "Apr. 5, 2026",
     datetime: "2026-04-05",
