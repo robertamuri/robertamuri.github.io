@@ -44,7 +44,7 @@ a:hover {
   gap: 32px;
 }
 
-.site-title {
+.site-header .site-title {
   flex: 0 0 auto;
   color: var(--heading);
   font-size: clamp(1.6rem, 3vw, 2.1rem);
