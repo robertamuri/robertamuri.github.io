@@ -29,6 +29,8 @@ a:hover {
   text-decoration: underline;
 }
 
+/* Header */
+
 .site-header {
   border-bottom: 1px solid var(--line);
   background: var(--background);
@@ -62,12 +64,14 @@ a:hover {
   justify-content: flex-end;
   flex-wrap: wrap;
   gap: 8px 20px;
-  font-size: 1.20rem;
+  font-size: 1.2rem;
 }
 
 .site-nav a {
   font-weight: 600;
 }
+
+/* Layout */
 
 .container {
   width: min(1080px, calc(100% - 48px));
@@ -79,6 +83,8 @@ a:hover {
   width: min(820px, calc(100% - 48px));
 }
 
+/* Home */
+
 .hero {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 310px;
@@ -88,19 +94,6 @@ a:hover {
 
 .hero-text {
   max-width: 680px;
-}
-
-.hero-text h1,
-.container h1,
-.news-section h2 {
-  margin: 0;
-  color: var(--heading);
-  line-height: 1.2;
-}
-
-.hero-text h1 {
-  margin-bottom: 24px;
-  font-size: clamp(2rem, 5vw, 3.1rem);
 }
 
 .hero-text p {
@@ -125,6 +118,18 @@ a:hover {
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.10);
 }
 
+/* Headings */
+
+.container h1,
+.news-section h2 {
+  margin: 0;
+  color: var(--heading);
+  line-height: 1.2;
+  font-size: clamp(1.6rem, 3vw, 2.1rem);
+}
+
+/* News */
+
 .news-section {
   margin-top: 72px;
   padding-top: 34px;
@@ -139,11 +144,6 @@ a:hover {
   margin-bottom: 22px;
 }
 
-.section-title-row h2,
-.container h1 {
-  font-size: clamp(1.6rem, 3vw, 2.1rem);
-}
-
 .view-all {
   font-size: 0.96rem;
   font-weight: 650;
@@ -156,7 +156,7 @@ a:hover {
 
 .news-card {
   display: grid;
-  grid-template-columns: 105px minmax(0, 1fr);
+  grid-template-columns: 120px minmax(0, 1fr);
   gap: 22px;
   padding: 20px 22px;
   border: 1px solid var(--line);
@@ -177,6 +177,80 @@ a:hover {
 .news-page-list {
   margin-top: 28px;
 }
+
+/* Research and standard content pages */
+
+.content-section {
+  margin-top: 44px;
+}
+
+.content-section:first-child {
+  margin-top: 0;
+}
+
+.content-section h2 {
+  color: var(--accent);
+  font-size: 1.45rem;
+  margin: 0 0 28px;
+}
+
+.entry {
+  margin-bottom: 36px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--line);
+}
+
+.entry p {
+  margin: 0 0 12px;
+}
+
+.presented-at {
+  color: #555;
+  font-size: 0.96rem;
+}
+
+.abstract-btn {
+  background: none;
+  border: none;
+  color: var(--accent);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 0;
+  margin-top: 4px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.abstract-btn:hover {
+  text-decoration: underline;
+}
+
+.abstract-btn .arrow {
+  display: inline-block;
+  margin-left: 6px;
+  transition: transform 0.25s ease;
+}
+
+.abstract-btn.active .arrow {
+  transform: rotate(180deg);
+}
+
+.abstract-content {
+  display: none;
+  margin-top: 12px;
+  color: #444;
+  font-size: 0.96rem;
+  line-height: 1.7;
+  text-align: left;
+}
+
+.abstract-content.show {
+  display: block;
+}
+
+/* Mobile */
 
 @media (max-width: 820px) {
   .header-inner {
