@@ -1,5 +1,17 @@
 const newsItems = [
 
+    {
+    date: "Oct. 23, 2026",
+    datetime: "2026-10-23",
+    text: `I am delighted to have won the Young Best Economist Award for my paper <em>Firms Under Water: Floods, Adaptation and Performance</em>.`
+  },
+
+  {
+    date: "Oct. 10, 2026",
+    datetime: "2026-10-10",
+    text: `The past few weeks have been full of presentations: first at LSE Environment Week in London (September 21–25), then in Bologna (September 30), and finally at AECCE in Urbino (October 7–8). Many thanks to the organisers and participants for the stimulating discussions and valuable feedback!`
+  },
+
   {
     date: "Jun. 1, 2026",
     datetime: "2026-06-01",
