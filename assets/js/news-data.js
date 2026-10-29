@@ -3,7 +3,7 @@ const newsItems = [
     {
     date: "Oct. 23, 2026",
     datetime: "2026-10-23",
-    text: `I am delighted to have won the Young Best Economist Award for my paper <em>Firms Under Water: Floods, Adaptation and Performance from the Italian Society of Economics (SIE)</em>.`
+    text: `I am delighted to have won the Best Young Economist Award for my paper <em>Firms Under Water: Floods, Adaptation and Performance from the Italian Society of Economics (SIE)</em>.`
   },
 
   {
@@ -55,9 +55,7 @@ function renderNews(containerId, limit) {
   const items = limit ? newsItems.slice(0, limit) : newsItems;
 
   container.innerHTML = items.map(item => `
-    <article class="news-card">
-      <time datetime="${item.datetime}">${item.date}</time>
-      <p>${item.text}</p>
-    </article>
+    <time datetime="${item.datetime}">${item.date}</time>
+    <p>${item.text}</p>
   `).join("");
 }
